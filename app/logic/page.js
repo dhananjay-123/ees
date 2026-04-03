@@ -48,52 +48,48 @@ const LogicPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 px-6 py-20 lg:px-24">
-      <header className="max-w-4xl mb-24">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="h-px w-12 bg-emerald-600"></div>
-          <span className="text-[10px] font-black uppercase tracking-[0.5em] text-emerald-600">Computation v2.6.0</span>
-        </div>
-        <h1 className="text-7xl font-black tracking-tighter mb-8 italic">
-          Technical <span className="text-emerald-600 underline decoration-slate-100">Logic</span>.
+    <div className="min-h-screen bg-[#F1F5F9] text-[#0F172A] px-6 py-12 md:py-20 md:px-24">
+      <header className="max-w-4xl mb-16 md:mb-24">
+        <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 md:mb-8 italic text-[#0F172A]">
+          Technical <span className="text-[#059669] underline decoration-[#CBD5E1]">Logic</span>.
         </h1>
-        <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-2xl">
+        <p className="text-lg md:text-xl text-[#64748B] font-medium leading-relaxed max-w-2xl">
           Detailed mathematical foundations of the AeroGradient engine.
         </p>
       </header>
 
-      <div className="space-y-32">
+      <div className="space-y-16 md:space-y-32">
         {technicalSections.map((section) => (
-          <section key={section.index} className="grid lg:grid-cols-12 gap-12 border-t border-slate-100 pt-16">
+          <section key={section.index} className="grid lg:grid-cols-12 gap-8 md:gap-12 border-t border-[#E2E8F0] pt-10 md:pt-16">
             <div className="lg:col-span-4">
-              <span className="text-6xl font-black text-slate-50 block mb-4">{section.index}</span>
-              <h2 className="text-2xl font-black tracking-tight mb-2 uppercase">{section.title}</h2>
-              <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest">{section.concept}</p>
+              <span className="text-4xl md:text-6xl font-black text-[#CBD5E1] block mb-2 md:mb-4">{section.index}</span>
+              <h2 className="text-xl md:text-2xl font-black tracking-tight mb-2 uppercase text-[#0F172A]">{section.title}</h2>
+              <p className="text-[10px] md:text-xs font-bold text-[#059669] uppercase tracking-widest">{section.concept}</p>
             </div>
 
-            <div className="lg:col-span-8 space-y-8">
-              <p className="text-lg text-slate-600 leading-relaxed">{section.description}</p>
+            <div className="lg:col-span-8 space-y-6 md:space-y-8">
+              <p className="text-base md:text-lg text-[#64748B] leading-relaxed">{section.description}</p>
               
-              <div className="p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 shadow-inner">
-                <div className="text-3xl text-slate-800 mb-10 overflow-x-auto py-4">
+              <div className="p-6 md:p-10 bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-[#E2E8F0] shadow-sm">
+                <div className="text-xl md:text-3xl text-[#0F172A] mb-6 md:mb-10 overflow-x-auto py-4 scrollbar-hide">
                   <BlockMath math={section.formula} />
                 </div>
                 
-                <div className="grid md:grid-cols-2 gap-y-4 gap-x-8 pt-8 border-t border-slate-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 pt-6 md:pt-8 border-t border-[#F1F5F9]">
                   {section.variables.map((v, i) => (
-                    <div key={i} className="flex gap-4 text-xs items-center">
-                      <span className="font-black text-emerald-600 min-w-[50px] bg-white p-1 rounded text-center border border-slate-100">
+                    <div key={i} className="flex gap-4 text-[10px] md:text-xs items-center">
+                      <span className="font-black text-[#059669] min-w-[45px] md:min-w-[50px] bg-[#F1F5F9] p-1 rounded text-center border border-[#E2E8F0]">
                         <InlineMath math={v.symbol} />
                       </span>
-                      <span className="text-slate-500 font-medium uppercase tracking-tight">{v.desc}</span>
+                      <span className="text-[#64748B] font-medium uppercase tracking-tight">{v.desc}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="p-6 bg-emerald-50 rounded-2xl border border-emerald-100 flex gap-4 items-center">
-                <div className="w-6 h-6 rounded-full bg-emerald-600 flex items-center justify-center text-[10px] text-white font-black italic">i</div>
-                <p className="text-[11px] font-black text-emerald-800 leading-relaxed uppercase tracking-tighter">
+              <div className="p-4 md:p-6 bg-[#059669]/5 rounded-xl md:rounded-2xl border border-[#059669]/10 flex gap-4 items-center">
+                <div className="shrink-0 w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#059669] flex items-center justify-center text-[8px] md:text-[10px] text-white font-black italic">i</div>
+                <p className="text-[10px] md:text-[11px] font-black text-[#059669] leading-relaxed uppercase tracking-tighter">
                   System Insight: {section.insight}
                 </p>
               </div>
@@ -102,8 +98,8 @@ const LogicPage = () => {
         ))}
       </div>
 
-      <footer className="mt-40 text-center opacity-20 hover:opacity-100 transition-opacity">
-        <p className="text-[9px] font-black uppercase tracking-[0.5em]">AeroGradient Mathematical Framework &copy; 2026</p>
+      <footer className="mt-24 md:mt-40 text-center opacity-40 transition-opacity">
+        <p className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.5em] text-[#64748B]">AeroGradient Mathematical Framework &copy; 2026</p>
       </footer>
     </div>
   );
