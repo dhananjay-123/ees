@@ -4,8 +4,8 @@ import dynamic from 'next/dynamic';
 import MapSearch from '../components/UI/MapSearch';
 import { fetchFullAnalysis } from '../services/RouteEngine';
 
-const IndiaMap = dynamic(() => import('../components/Map/IndiaMap'), { 
-  ssr: false, 
+const IndiaMap = dynamic(() => import('../components/Map/IndiaMap'), {
+  ssr: false,
   loading: () => (
     <div className="h-full w-full bg-[#F1F5F9] flex items-center justify-center">
       <p className="animate-pulse text-[#64748B] font-black uppercase tracking-[0.3em] text-[10px]">
@@ -61,7 +61,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col md:flex-row h-[calc(100vh-64px)] overflow-hidden bg-[#F1F5F9]">
-      
+
       {/* SIDEBAR */}
       <aside className="hidden md:flex flex-col w-[400px] p-8 border-r border-[#E2E8F0] bg-white z-20 overflow-y-auto shadow-xl shrink-0">
         <header className="mb-8">
@@ -69,12 +69,12 @@ export default function Home() {
             <div className="w-2 h-2 bg-[#059669] rounded-full animate-pulse"></div>
             <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#64748B]">System Ready</h2>
           </div>
-          
+
           <div className="space-y-3">
-            <MapSearch label="Departure" onLocationSelect={(c) => setCoords(p => ({...p, start: c}))} />
-            <MapSearch label="Arrival" onLocationSelect={(c) => setCoords(p => ({...p, end: c}))} />
-            <button 
-              onClick={onRunAnalysis} 
+            <MapSearch label="Departure" onLocationSelect={(c) => setCoords(p => ({ ...p, start: c }))} />
+            <MapSearch label="Arrival" onLocationSelect={(c) => setCoords(p => ({ ...p, end: c }))} />
+            <button
+              onClick={onRunAnalysis}
               disabled={loading}
               className="w-full bg-[#0F172A] text-white py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-[#059669] transition-all active:scale-95 shadow-lg"
             >
@@ -123,10 +123,10 @@ export default function Home() {
             <div className="bg-white/95 backdrop-blur-xl p-5 rounded-[2.5rem] shadow-2xl border border-[#E2E8F0]">
               <p className="text-[9px] font-black uppercase tracking-widest text-[#64748B] mb-4 text-center">Configure Route</p>
               <div className="space-y-3">
-                <MapSearch label="Departure" onLocationSelect={(c) => setCoords(p => ({...p, start: c}))} />
-                <MapSearch label="Arrival" onLocationSelect={(c) => setCoords(p => ({...p, end: c}))} />
+                <MapSearch label="Departure" onLocationSelect={(c) => setCoords(p => ({ ...p, start: c }))} />
+                <MapSearch label="Arrival" onLocationSelect={(c) => setCoords(p => ({ ...p, end: c }))} />
                 <button onClick={onRunAnalysis} disabled={loading} className="w-full bg-[#0F172A] text-white py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest active:scale-95 transition-all">
-                   {loading ? "Calculating..." : "Find Eco Path"}
+                  {loading ? "Calculating..." : "Find Eco Path"}
                 </button>
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function Home() {
 
         {/* MOBILE: "NEW SEARCH" BUTTON */}
         {!isSearchingMobile && (
-          <button 
+          <button
             onClick={() => setIsSearchingMobile(true)}
             className="md:hidden absolute top-6 left-1/2 -translate-x-1/2 z-[1001] bg-white px-6 py-3 rounded-full border border-[#E2E8F0] shadow-xl flex items-center gap-2 active:scale-95 transition-all"
           >
@@ -149,7 +149,7 @@ export default function Home() {
           <div className={`md:hidden absolute bottom-0 left-0 right-0 z-[1002] bg-white rounded-t-[3rem] shadow-[0_-20px_60px_rgba(15,23,42,0.1)] transition-transform duration-700 ease-in-out ${showMobileDetails ? 'translate-y-0' : 'translate-y-[calc(100%-80px)]'}`}>
             <div className="w-full flex flex-col items-center py-5 cursor-pointer" onClick={() => setShowMobileDetails(!showMobileDetails)}>
               <div className={`transition-transform duration-500 ${showMobileDetails ? 'rotate-180' : 'rotate-0'}`}>
-                <svg width="20" height="12" viewBox="0 0 20 12" fill="none" className="stroke-[#CBD5E1] stroke-[3px]"><path d="M2 10L10 2L18 10" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                <svg width="20" height="12" viewBox="0 0 20 12" fill="none" className="stroke-[#CBD5E1] stroke-[3px]"><path d="M2 10L10 2L18 10" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </div>
               <p className="text-[8px] font-black uppercase text-[#64748B] tracking-[0.3em] mt-2">{showMobileDetails ? 'Hide Stats' : 'View Details'}</p>
             </div>
@@ -184,7 +184,7 @@ export default function Home() {
             </header>
             <div className="space-y-6">
               <div className="flex justify-between items-end"><span className="text-[9px] font-black text-[#CBD5E1] uppercase">Fast Path</span><span className="text-xl font-black text-[#CBD5E1] italic">{data.distFast}km</span></div>
-              <div className="flex justify-between items-end border-b border-[#F1F5F9] pb-6"><span className="text-[9px] font-black text-[#059669] uppercase tracking-widest">Aero Path</span><span className="text-2xl font-black text-[#059669]">{data.distGreen}km</span></div>
+              <div className="flex justify-between items-end border-b border-[#F1F5F9] pb-6"><span className="text-[9px] font-black text-[#059669] uppercase tracking-widest">BREATH Path</span><span className="text-2xl font-black text-[#059669]">{data.distGreen}km</span></div>
               <div className="flex justify-between items-center"><span className="text-[10px] font-black text-[#0F172A] uppercase">Delta</span><span className="text-3xl font-black text-[#0F172A]">+{calculateDelta()}km</span></div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 /**
- * AeroGradient Routing Engine
+ * BREATHPATH Routing Engine
  * Handles Multi-mode pathfinding, Environmental Vitals, 
  * and Automatic Long-Range Fallback.
  */
@@ -10,7 +10,7 @@ const WEATHER_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
 export const fetchFullAnalysis = async (start, end) => {
   // Format waypoints for Geoapify: "lat,lon|lat,lon"
   const waypoints = `${start[0]},${start[1]}|${end[0]},${end[1]}`;
-  
+
   try {
     // 1. Fetch Fast Route (Standard Driving)
     const resFast = await fetch(
@@ -22,7 +22,7 @@ export const fetchFullAnalysis = async (start, end) => {
     let resGreen = await fetch(
       `https://api.geoapify.com/v1/routing?waypoints=${waypoints}&mode=bicycle&apiKey=${GEOAPIFY_KEY}`
     );
-    
+
     let dataGreen;
     let isFallback = false;
 
@@ -49,18 +49,18 @@ export const fetchFullAnalysis = async (start, end) => {
 
     // 4. Safe Distance Extraction (Convert meters to kilometers)
     // We use Optional Chaining (?.) to prevent crashes if the API response is empty
-    const distF = dataFast.features?.[0]?.properties?.distance 
-      ? (dataFast.features[0].properties.distance / 1000).toFixed(1) 
+    const distF = dataFast.features?.[0]?.properties?.distance
+      ? (dataFast.features[0].properties.distance / 1000).toFixed(1)
       : "0.0";
 
-    const distG = dataGreen.features?.[0]?.properties?.distance 
-      ? (dataGreen.features[0].properties.distance / 1000).toFixed(1) 
+    const distG = dataGreen.features?.[0]?.properties?.distance
+      ? (dataGreen.features[0].properties.distance / 1000).toFixed(1)
       : distF;
 
     // 5. Calculate Metrics
     // If fallback is active, score is lower (highway travel). If bicycle, score is high.
-    const greenScore = isFallback 
-      ? Math.floor(Math.random() * (35 - 20) + 20) 
+    const greenScore = isFallback
+      ? Math.floor(Math.random() * (35 - 20) + 20)
       : Math.floor(Math.random() * (95 - 78) + 78);
 
     return {

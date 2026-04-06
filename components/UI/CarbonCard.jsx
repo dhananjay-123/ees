@@ -1,6 +1,6 @@
 const CarbonCard = ({ energy, savings }) => {
   return (
-    <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-emerald-500/30 shadow-lg">
+    <div className="bg-PATH-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-emerald-500/30 shadow-lg">
       <h3 className="text-emerald-400 font-bold uppercase text-xs tracking-widest mb-4">Route Analysis</h3>
       <div className="space-y-4">
         <div>

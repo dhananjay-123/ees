@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
-import { Zap } from "lucide-react";
+
+
 
 export default function LoadingScreen() {
   return (
@@ -14,14 +15,14 @@ export default function LoadingScreen() {
         <div className="relative mb-8">
           <div className="absolute inset-0 bg-[#059669] rounded-2xl blur-xl opacity-20 animate-ping" />
           <div className="relative w-16 h-16 bg-[#059669] rounded-2xl flex items-center justify-center text-white shadow-2xl shadow-[#059669]/20">
-            <Zap size={32} fill="white" className="animate-pulse" />
+            <img src="../../logo.webp" alt="" className='animate-pulse' />
           </div>
         </div>
 
         {/* Brand & Tagline */}
         <div className="text-center space-y-2">
           <h1 className="text-2xl md:text-3xl font-black italic tracking-tighter uppercase text-[#0F172A]">
-            AERO<span className="text-[#059669]">GRADIENT</span>
+            BREATH<span className="text-[#059669]">PATH</span>
           </h1>
           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#64748B]">
             Navigation Re-Engineered
@@ -32,7 +33,7 @@ export default function LoadingScreen() {
         <div className="mt-12 w-48 h-[2px] bg-[#E2E8F0] rounded-full overflow-hidden">
           <div className="h-full bg-[#059669] w-full animate-progress-slide" />
         </div>
-        
+
         <p className="mt-4 text-[8px] font-bold uppercase tracking-widest text-[#CBD5E1]">
           Initializing Geospatial Vitals
         </p>

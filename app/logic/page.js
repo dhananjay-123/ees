@@ -9,7 +9,7 @@ const LogicPage = () => {
       index: "01",
       title: "Biophilic Cost Weighting",
       concept: "Modified A* Search Algorithm",
-      description: "Standard GPS routing minimizes for Time (T). AeroGradient redefines the graph edge weight (w) by introducing a Biophilic Coefficient (G).",
+      description: "Standard GPS routing minimizes for Time (T). BREATHPATH redefines the graph edge weight (w) by introducing a Biophilic Coefficient (G).",
       formula: "C = \\sum_{i=1}^{n} d_i \\times (1 - (G_i \\times \\phi))",
       variables: [
         { symbol: "C", desc: "Total weighted route cost" },
@@ -54,7 +54,7 @@ const LogicPage = () => {
           Technical <span className="text-[#059669] underline decoration-[#CBD5E1]">Logic</span>.
         </h1>
         <p className="text-lg md:text-xl text-[#64748B] font-medium leading-relaxed max-w-2xl">
-          Detailed mathematical foundations of the AeroGradient engine.
+          Detailed mathematical foundations of the BREATHPATH engine.
         </p>
       </header>
 
@@ -69,12 +69,12 @@ const LogicPage = () => {
 
             <div className="lg:col-span-8 space-y-6 md:space-y-8">
               <p className="text-base md:text-lg text-[#64748B] leading-relaxed">{section.description}</p>
-              
+
               <div className="p-6 md:p-10 bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-[#E2E8F0] shadow-sm">
                 <div className="text-xl md:text-3xl text-[#0F172A] mb-6 md:mb-10 overflow-x-auto py-4 scrollbar-hide">
                   <BlockMath math={section.formula} />
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 pt-6 md:pt-8 border-t border-[#F1F5F9]">
                   {section.variables.map((v, i) => (
                     <div key={i} className="flex gap-4 text-[10px] md:text-xs items-center">
@@ -99,7 +99,7 @@ const LogicPage = () => {
       </div>
 
       <footer className="mt-24 md:mt-40 text-center opacity-40 transition-opacity">
-        <p className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.5em] text-[#64748B]">AeroGradient Mathematical Framework &copy; 2026</p>
+        <p className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.5em] text-[#64748B]">BREATHPATH Mathematical Framework &copy; 2026</p>
       </footer>
     </div>
   );
