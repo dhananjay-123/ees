@@ -23,7 +23,7 @@ export default function Navbar() {
             <img src="../../logo.webp" alt="Logo" className="w-full h-full object-contain" />
           </div>
           <span className="font-black tracking-tighter text-xl italic uppercase text-[#0F172A]">
-            BREATH<span className="text-[#059669]">PATH</span>
+            BREATHE<span className="text-[#059669]">PATH</span>
           </span>
         </div>
 

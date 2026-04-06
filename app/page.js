@@ -184,7 +184,7 @@ export default function Home() {
             </header>
             <div className="space-y-6">
               <div className="flex justify-between items-end"><span className="text-[9px] font-black text-[#CBD5E1] uppercase">Fast Path</span><span className="text-xl font-black text-[#CBD5E1] italic">{data.distFast}km</span></div>
-              <div className="flex justify-between items-end border-b border-[#F1F5F9] pb-6"><span className="text-[9px] font-black text-[#059669] uppercase tracking-widest">BREATH Path</span><span className="text-2xl font-black text-[#059669]">{data.distGreen}km</span></div>
+              <div className="flex justify-between items-end border-b border-[#F1F5F9] pb-6"><span className="text-[9px] font-black text-[#059669] uppercase tracking-widest">BREATHE Path</span><span className="text-2xl font-black text-[#059669]">{data.distGreen}km</span></div>
               <div className="flex justify-between items-center"><span className="text-[10px] font-black text-[#0F172A] uppercase">Delta</span><span className="text-3xl font-black text-[#0F172A]">+{calculateDelta()}km</span></div>
             </div>
           </div>

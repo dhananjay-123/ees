@@ -22,7 +22,7 @@ export default function LoadingScreen() {
         {/* Brand & Tagline */}
         <div className="text-center space-y-2">
           <h1 className="text-2xl md:text-3xl font-black italic tracking-tighter uppercase text-[#0F172A]">
-            BREATH<span className="text-[#059669]">PATH</span>
+            BREATHE<span className="text-[#059669]">PATH</span>
           </h1>
           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#64748B]">
             Navigation Re-Engineered

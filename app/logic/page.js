@@ -9,7 +9,7 @@ const LogicPage = () => {
       index: "01",
       title: "Biophilic Cost Weighting",
       concept: "Modified A* Search Algorithm",
-      description: "Standard GPS routing minimizes for Time (T). BREATHPATH redefines the graph edge weight (w) by introducing a Biophilic Coefficient (G).",
+      description: "Standard GPS routing minimizes for Time (T). BREATHEPATH redefines the graph edge weight (w) by introducing a Biophilic Coefficient (G).",
       formula: "C = \\sum_{i=1}^{n} d_i \\times (1 - (G_i \\times \\phi))",
       variables: [
         { symbol: "C", desc: "Total weighted route cost" },
@@ -54,7 +54,7 @@ const LogicPage = () => {
           Technical <span className="text-[#059669] underline decoration-[#CBD5E1]">Logic</span>.
         </h1>
         <p className="text-lg md:text-xl text-[#64748B] font-medium leading-relaxed max-w-2xl">
-          Detailed mathematical foundations of the BREATHPATH engine.
+          Detailed mathematical foundations of the BREATHEPATH engine.
         </p>
       </header>
 
@@ -99,7 +99,7 @@ const LogicPage = () => {
       </div>
 
       <footer className="mt-24 md:mt-40 text-center opacity-40 transition-opacity">
-        <p className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.5em] text-[#64748B]">BREATHPATH Mathematical Framework &copy; 2026</p>
+        <p className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.5em] text-[#64748B]">BREATHEPATH Mathematical Framework &copy; 2026</p>
       </footer>
     </div>
   );

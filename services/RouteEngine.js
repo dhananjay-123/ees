@@ -1,5 +1,5 @@
 /**
- * BREATHPATH Routing Engine
+ * BREATHEPATH Routing Engine
  * Handles Multi-mode pathfinding, Environmental Vitals, 
  * and Automatic Long-Range Fallback.
  */
