@@ -123,9 +123,9 @@ const LogicPage = () => {
               {/* FORMULA CARD */}
               <motion.div
                 whileHover={{ y: -4 }}
-                className="card-spotlight p-6 md:p-10 bg-white rounded-[2rem] border border-[#E2E8F0] shadow-sm"
+                className="card-spotlight p-4 md:p-10 bg-white rounded-[2rem] border border-[#E2E8F0] shadow-sm"
               >
-                <div className="text-xl md:text-3xl mb-6 md:mb-10 overflow-x-auto py-4">
+                <div className="text-sm md:text-3xl mb-6 md:mb-10 overflow-x-auto py-4">
                   <BlockMath math={section.formula} />
                 </div>
 
