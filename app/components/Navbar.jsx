@@ -25,18 +25,23 @@ export default function Navbar() {
     setIsOpen(false);
     setIsTransitioning(true);
 
+    // 🔥 SHOW transition FIRST
     setTimeout(() => {
       router.push(href);
 
+      // 🔥 HOLD AFTER navigation (important for production)
       setTimeout(() => {
         setIsTransitioning(false);
-      }, 600);
-    }, 300);
+      }, 500);
+    }, 400);
   };
 
   return (
     <>
-      {isTransitioning && <LoadingScreen />}
+      {/* 🌿 TRANSITION OVERLAY */}
+      <AnimatePresence>
+        {isTransitioning && <LoadingScreen />}
+      </AnimatePresence>
 
       {/* NAVBAR */}
       <nav className="fixed top-0 w-full h-16 bg-[#F1F5F9]/70 backdrop-blur-xl border-b border-[#E2E8F0] z-[2000] px-6 flex items-center justify-between">
@@ -55,13 +60,13 @@ export default function Navbar() {
           </span>
         </div>
 
-        {/* Desktop */}
+        {/* Desktop Links */}
         <div className="hidden sm:flex gap-10">
           {links.map((link) => (
             <button
               key={link.href}
               onClick={() => handleNav(link.href)}
-              className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
+              className={`text-[10px] font-bold uppercase tracking-[0.2em] transition ${
                 pathname === link.href
                   ? "text-[#059669]"
                   : "text-[#64748B] hover:text-[#0F172A]"
