@@ -74,7 +74,7 @@ const LogicPage = () => {
   };
 
   return (
-    <div className="bg-[#F1F5F9] min-h-[100dvh] mx-auto text-[#0F172A] px-6 py-20 md:py-20 md:px-24 overflow-x-hidden">
+    <div className="bg-[#F1F5F9] min-h-[100dvh] mx-auto text-[#0F172A] px-6 py-20 md:py-20 md:px-24 ">
 
       {/* Header */}
       <motion.header
