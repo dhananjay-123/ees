@@ -13,3 +13,41 @@
     animation: progress-slide 1.5s ease-in-out infinite;
   }
 }
+
+
+/* Keep the transition area stable */
+main {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  overflow-x: hidden; /* Prevent horizontal scrollbars during slide */
+}
+
+/* Ensure the entering and exiting pages occupy the same grid cell */
+main > div {
+  grid-area: 1 / 1 / 2 / 2;
+  width: 100%;
+}
+
+.card-spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(5, 150, 105, 0.18),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.card-spotlight:hover::before {
+  opacity: 1;
+}

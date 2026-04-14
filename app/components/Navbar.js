@@ -1,12 +1,17 @@
 "use client";
+
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import LoadingScreen from "./LoadingScreen";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const links = [
     { name: "Navigator", href: "/" },
@@ -14,70 +19,128 @@ export default function Navbar() {
     { name: "Credits", href: "/credits" },
   ];
 
+  const handleNav = (href) => {
+    if (href === pathname) return;
+
+    setIsOpen(false);
+    setIsTransitioning(true);
+
+    setTimeout(() => {
+      router.push(href);
+
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 600);
+    }, 300);
+  };
+
   return (
     <>
-      <nav className="fixed top-0 w-full h-16 bg-[#F1F5F9]/80 backdrop-blur-md border-b border-[#E2E8F0] z-[2000] px-6 lg:px-12 flex items-center justify-between">
-        {/* Brand Logo */}
+      {isTransitioning && <LoadingScreen />}
+
+      {/* NAVBAR */}
+      <nav className="fixed top-0 w-full h-16 bg-[#F1F5F9]/70 backdrop-blur-xl border-b border-[#E2E8F0] z-[2000] px-6 flex items-center justify-between">
+        
+        {/* Logo */}
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white shadow-lg shadow-[#059669]/20">
-            <img src="../../logo.webp" alt="Logo" className="w-full h-full object-contain" />
-          </div>
-          <span className="font-black tracking-tighter text-xl italic uppercase text-[#0F172A]">
+          <motion.div
+            layoutId="app-logo"
+            className="w-8 h-8 bg-[#059669] rounded-lg flex items-center justify-center"
+          >
+            <img src="/logo.webp" className="w-full h-full object-contain" />
+          </motion.div>
+
+          <span className="font-black text-xl italic uppercase">
             BREATHE<span className="text-[#059669]">PATH</span>
           </span>
         </div>
 
-        {/* Desktop Links */}
+        {/* Desktop */}
         <div className="hidden sm:flex gap-10">
           {links.map((link) => (
-            <Link
+            <button
               key={link.href}
-              href={link.href}
-              className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all relative py-1 ${pathname === link.href ? "text-[#059669]" : "text-[#64748B] hover:text-[#0F172A]"
-                }`}
+              onClick={() => handleNav(link.href)}
+              className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
+                pathname === link.href
+                  ? "text-[#059669]"
+                  : "text-[#64748B] hover:text-[#0F172A]"
+              }`}
             >
               {link.name}
-              {pathname === link.href && (
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#059669] rounded-full animate-in fade-in duration-500" />
-              )}
-            </Link>
+            </button>
           ))}
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Button */}
         <button
-          className="sm:hidden p-2 text-[#64748B] hover:bg-[#E2E8F0] rounded-xl transition-colors focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
+          onClick={() => setIsOpen(true)}
+          className="sm:hidden p-2 rounded-xl active:scale-90 transition"
         >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
+          <Menu size={20} />
         </button>
-
-        {/* Mobile Menu Overlay */}
-        {isOpen && (
-          <div className="fixed top-16 left-0 w-full h-[calc(100vh-64px)] bg-[#F1F5F9] z-[1999] p-8 flex flex-col gap-8 sm:hidden animate-in slide-in-from-top-2 duration-300">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`text-[11px] font-black uppercase tracking-[0.3em] transition-colors ${pathname === link.href ? "text-[#059669]" : "text-[#64748B] hover:text-[#0F172A]"
-                  }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-        )}
       </nav>
 
-      {/* Background Dimmer */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-[#0F172A]/10 backdrop-blur-sm z-[1998] sm:hidden"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
+      {/* 🔥 MOBILE MENU */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* BACKDROP */}
+            <motion.div
+              className="fixed inset-0 bg-black/30 backdrop-blur-md z-[1998]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+            />
+
+            {/* PANEL */}
+            <motion.div
+              drag="y"
+              dragConstraints={{ top: 0, bottom: 0 }}
+              onDragEnd={(e, info) => {
+                if (info.offset.y > 100) setIsOpen(false);
+              }}
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "100%", opacity: 0 }}
+              transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+              className="fixed bottom-0 left-0 w-full h-[75vh] bg-white/80 backdrop-blur-2xl border-t border-[#E2E8F0] rounded-t-[2.5rem] z-[1999] p-8 flex flex-col"
+            >
+              {/* HANDLE */}
+              <div className="w-12 h-1.5 bg-[#CBD5E1] rounded-full mx-auto mb-6" />
+
+              {/* CLOSE */}
+              <div className="flex justify-end mb-6">
+                <button onClick={() => setIsOpen(false)}>
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* LINKS */}
+              <div className="flex flex-col gap-6 mt-4">
+                {links.map((link, i) => (
+                  <motion.button
+                    key={link.href}
+                    onClick={() => handleNav(link.href)}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.08 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`text-lg font-black uppercase tracking-[0.2em] text-left ${
+                      pathname === link.href
+                        ? "text-[#059669]"
+                        : "text-[#0F172A]"
+                    }`}
+                  >
+                    {link.name}
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }

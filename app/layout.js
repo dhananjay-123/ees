@@ -1,47 +1,44 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import PageTransition from "./components/PageTransition";
 import LoadingScreen from "./components/LoadingScreen";
-
+import Cursor from "./components/Cursor";
 export default function RootLayout({ children }) {
-  const [isAppLoading, setIsAppLoading] = useState(true);
-  const [mounted, setMounted] = useState(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   useEffect(() => {
-    setMounted(true); // Confirms we are now on the client
     const timer = setTimeout(() => {
-      setIsAppLoading(false);
-    }, 1500);
+      setIsInitialLoading(false);
+    }, 1400);
 
     return () => clearTimeout(timer);
   }, []);
 
-  // Prevent hydration mismatch by returning a consistent shell 
-  // until the client-side mounting is confirmed.
-  if (!mounted) {
-    return (
-      <html lang="en">
-        <body className="bg-[#F1F5F9]"><LoadingScreen /></body>
-      </html>
-    );
-  }
-
   return (
     <html lang="en">
-      <body className="antialiased bg-[#F1F5F9] text-[#0F172A] font-sans overflow-x-hidden">
-        {isAppLoading && <LoadingScreen />}
-        
-        <div 
-          className={`transition-opacity duration-1000 ease-in-out ${
-            isAppLoading ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          <Navbar />
-          <main className="h-screen pt-16">
-            {children}
-          </main>
-        </div>
+      <body className="bg-[#F1F5F9] overflow-x-hidden">
+        <Cursor />
+
+        {/* Loader */}
+        <AnimatePresence mode="wait">
+          {isInitialLoading && <LoadingScreen key="loader" />}
+        </AnimatePresence>
+
+        {/* Main App */}
+        {!isInitialLoading && (
+          <>
+            <Navbar />
+
+            {/* ✅ FIXED WRAPPER */}
+            <div className="relative pt-16">
+              <PageTransition>{children}</PageTransition>
+            </div>
+          </>
+        )}
+
       </body>
     </html>
   );
