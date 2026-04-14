@@ -44,7 +44,7 @@ export default function CreditsPage() {
   };
 
   return (
-    <div className="bg-[#F1F5F9] min-h-[100dvh] pb-20">
+    <div className="bg-[#F1F5F9] min-h-[100dvh] pb-20 pt-15">
       <div className="max-w-6xl mx-auto py-12 md:py-24 px-6 md:px-10 text-center">
 
         {/* Tech Stack */}
