@@ -4,14 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import LoadingScreen from "./LoadingScreen";
+import { useTransition } from "./TransitionProvider";
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const { setIsTransitioning } = useTransition();
 
   const links = [
     { name: "Navigator", href: "/" },
@@ -29,20 +29,15 @@ export default function Navbar() {
     setTimeout(() => {
       router.push(href);
 
-      // 🔥 HOLD AFTER navigation (important for production)
+      // 🔥 HOLD AFTER navigation (to allow page to mount before exit)
       setTimeout(() => {
         setIsTransitioning(false);
-      }, 500);
-    }, 400);
+      }, 300);
+    }, 700); // 👈 Waited for grid cells to ripple in
   };
 
   return (
     <>
-      {/* 🌿 TRANSITION OVERLAY */}
-      <AnimatePresence>
-        {isTransitioning && <LoadingScreen />}
-      </AnimatePresence>
-
       {/* NAVBAR */}
       <nav className="fixed top-0 w-full h-16 bg-[#F1F5F9]/70 backdrop-blur-xl border-b border-[#E2E8F0] z-[2000] px-6 flex items-center justify-between">
         

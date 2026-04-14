@@ -24,11 +24,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-[#F1F5F9] overflow-x-hidden">
-
         <TransitionProvider>
-    <Navbar />
-    {children}
-  </TransitionProvider>
+          <AnimatePresence mode="wait">
+            {isInitialLoading && <LoadingScreen />}
+          </AnimatePresence>
+          <PageTransition />
+          <Navbar />
+          {children}
+        </TransitionProvider>
       </body>
     </html>
   );

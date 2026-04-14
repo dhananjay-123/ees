@@ -5,40 +5,51 @@ import { motion } from "framer-motion";
 export default function LoadingScreen() {
   return (
     <motion.div
-      className="fixed inset-0 z-[5000] flex items-center justify-center"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
-      style={{ backdropFilter: "blur(6px)" }}
+      className="fixed inset-0 z-[6000] flex items-center justify-center overflow-hidden"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: 1.1 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* BACKGROUND */}
-      <div className="absolute inset-0 bg-[#F1F5F9]" />
+      {/* DEEP PREMIUM BACKGROUND */}
+      <div className="absolute inset-0 bg-[#022c22]" />
 
-      {/* 🌿 GRADIENT SWEEP */}
+      {/* 🌿 CONCENTRIC GLOWING RINGS */}
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute border border-[#059669]/30 rounded-full"
+          style={{ width: `${(i + 1) * 30}vw`, height: `${(i + 1) * 30}vw` }}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 - i * 0.2 }}
+          transition={{
+            duration: 1.5,
+            delay: i * 0.2,
+            ease: "easeOut",
+          }}
+        />
+      ))}
+
+      {/* 🌿 CENTER LOGO (HUGE) */}
       <motion.div
-        className="absolute inset-0"
-        initial={{ x: "-40%" }}
-        animate={{ x: "40%" }}
+        initial={{ scale: 0, rotate: -15, opacity: 0, y: 50 }}
+        animate={{ scale: 1, rotate: 0, opacity: 1, y: 0 }}
         transition={{
-          duration: 0.9,
-          ease: [0.25, 0.8, 0.25, 1],
+          type: "spring",
+          stiffness: 200,
+          damping: 20,
+          delay: 0.2,
         }}
-        style={{
-          background:
-            "linear-gradient(120deg, transparent, #D1FAE5, transparent)",
-          opacity: 0.6,
-        }}
-      />
-
-      {/* 🌿 CENTER LOGO */}
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.15, duration: 0.4 }}
-        className="relative z-10 w-12 h-12 bg-[#059669] rounded-xl flex items-center justify-center shadow-lg"
+        className="relative z-10 w-44 h-44 sm:w-56 sm:h-56 bg-white p-8 rounded-[2.5rem] flex items-center justify-center shadow-[0_0_100px_rgba(5,150,105,0.6)] overflow-hidden"
       >
-        <img src="/logo.webp" className="w-full h-full object-contain" />
+        {/* SHIMMER GLARE inside logo box */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-80 mix-blend-overlay z-20"
+          initial={{ x: "-200%", skewX: "-20deg" }}
+          animate={{ x: "200%" }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        />
+        
+        <img src="/logo.webp" className="relative z-10 w-full h-full object-contain" />
       </motion.div>
     </motion.div>
   );
